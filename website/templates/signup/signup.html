@@ -12,4 +12,24 @@ Signup
 
 {% block content %}
 <h1>Signup page</h1>
+<form method="POST">
+  <div class="">
+    <label for="emial">Email</label>
+    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="">
+    <label for="emial">First Name</label>
+    <input type="text" class="" id="firstName" name="firstName" placeholder="Enter firstName">
+  </div>
+  <div class="">
+    <label for="emial">Password</label>
+    <input type="password" class="" id="password1" name="password1" placeholder="Enter password1">
+  </div>
+  <div class="">
+    <label for="emial">Password</label>
+    <input type="password" class="" id="password2" name="password2" placeholder="Enter password2">
+  </div>
+  <br />
+  <button type="submit" class="">Submit</button>
+</form>
 {% endblock%}
