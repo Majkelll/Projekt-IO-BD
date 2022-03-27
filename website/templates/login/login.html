@@ -12,4 +12,16 @@ Login
 
 {% block content %}
 <h1>Login page</h1>
+<form method="POST">
+  <div class="">
+    <label for="emial">Email</label>
+    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="">
+    <label for="password">Password</label>
+    <input type="password" class="" id="password" name="password" placeholder="Enter password">
+  </div>
+  <br />
+  <button type="submit" class="">Submit</button>
+</form>
 {% endblock%}
