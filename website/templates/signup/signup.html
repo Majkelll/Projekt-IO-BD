@@ -1,0 +1,47 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Signup
+{% endblock %}
+
+{% block extracss %}
+{% endblock %}
+
+{% block extrascript %}
+{% endblock%}
+
+{% block content %}
+<h1>Signup page</h1>
+<form method="POST">
+  <div class="">
+    <label for="emial">Email</label>
+    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="">
+    <label for="firstName">First Name</label>
+    <input type="text" class="" id="firstName" name="firstName" placeholder="Enter firstName">
+  </div>
+  <div class="">
+    <label for="password1">Password</label>
+    <input type="password" class="" id="password1" name="password1" placeholder="Enter password1">
+  </div>
+  <div class="">
+    <label for="password2">Password</label>
+    <input type="password" class="" id="password2" name="password2" placeholder="Enter password2">
+  </div>
+  <br />
+  <button type="submit" class="">Submit</button>
+</form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category=='error' %}
+                <p style="color: red;">{{ message }}</p>
+            {% endif %}
+            {% if category=='success' %}
+                <p style="color: green;">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% endblock%}

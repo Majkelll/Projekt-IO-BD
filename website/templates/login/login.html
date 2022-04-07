@@ -1,0 +1,39 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Login
+{% endblock %}
+
+{% block extracss %}
+{% endblock %}
+
+{% block extrascript %}
+{% endblock%}
+
+{% block content %}
+<h1>Login page</h1>
+<form method="POST">
+  <div class="">
+    <label for="emial">Email</label>
+    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="">
+    <label for="password">Password</label>
+    <input type="password" class="" id="password" name="password" placeholder="Enter password">
+  </div>
+  <br />
+  <button type="submit" class="">Submit</button>
+</form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category=='error' %}
+                <p style="color: red;">{{ message }}</p>
+            {% endif %}
+            {% if category=='success' %}
+                <p style="color: green;">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% endblock%}
