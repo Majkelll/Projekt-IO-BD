@@ -1,0 +1,5 @@
+WRONG_EMAIL = "Nieprawidłowy email."
+WRONG_NAME = "Wpisz poprawne imię."
+DIFFERENT_PASSWORDS = "Wpisane hasła nie są identyczne."
+PASSWORD_TOO_WEAK = "Hasło musi składać się z co najmniej 8 znaków i musi zawierać: duże i małe litery, cyfry i znaki specjalne."
+ACCOUNT_CREATED = "Konto zostało utworzone. Możesz teraz się zalogować."
