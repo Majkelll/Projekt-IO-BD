@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import User
+
+from website.scripts.helpers import send_email
+from .models.User import User
 from . import db
 from flask_login import login_user
 from passlib.hash import sha256_crypt
@@ -17,10 +19,10 @@ def home():
 @views.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
-
         email = request.form.get('email')
         first_name = request.form.get('firstName')
-        passwords = [request.form.get('password1'), request.form.get('password2')]
+        passwords = [request.form.get(
+            'password1'), request.form.get('password2')]
 
         validate = validate_data(email, first_name, passwords[0], passwords[1])
 
@@ -28,7 +30,8 @@ def sign_up():
             flash(validate['content'], category=validate['status'])
         elif validate['status'] == 'success':
             hashed_password = sha256_crypt.encrypt(passwords[0])
-            new_user = User(email=email, username=first_name, password=hashed_password)
+            new_user = User(email=email, username=first_name,
+                            password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             flash(validate['content'], category=validate['status'])
