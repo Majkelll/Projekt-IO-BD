@@ -1,10 +1,14 @@
-from website.scripts.consts.email import EMAIL_ADDRESS
-from ... import mail
 from flask_mail import Message
 
+from website.scripts.consts.email import EMAIL_ADDRESS
+from ... import mail
 
-def send_email(email: str, title: str, body: str) -> None:
-    msg = Message(title,
-                  sender=EMAIL_ADDRESS, recipients=[email])
+
+def send_email(to: str, subject: str, body: str) -> None:
+    msg = Message(subject, sender=EMAIL_ADDRESS,
+                  recipients=[to])
     msg.body = body
-    mail.send(msg)
+    try:
+        mail.send(msg)
+    except Exception as e:
+        print("[ERROR][EMAIL]", e)

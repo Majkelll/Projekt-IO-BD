@@ -3,3 +3,4 @@ flask_login
 sqlalchemy
 flask_sqlalchemy
 passlib
+flask_mail
