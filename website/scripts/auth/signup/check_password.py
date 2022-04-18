@@ -21,7 +21,7 @@ def check_password(password):
     if numbers and re.search(r"\d", password) is None:
         return False
     # look for special characters
-    if special_characters and re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None:
+    if special_characters and re.search(r"[ !#$%@&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None:
         return False
 
     return True

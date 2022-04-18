@@ -8,4 +8,14 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(128), unique=True)
     username = db.Column(db.String(128), unique=True)
     password = db.Column(db.String(128))
+    gender = db.Column(db.String(1))
+    birthdate = db.Column(db.Date)
     data_created = db.Column(db.DateTime(timezone=True), default=func.now())
+
+
+class BMI(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    weight = db.Column(db.Numeric)
+    height = db.Column(db.Numeric)
+    data_collected = db.Column(db.DateTime(timezone=True), default=func.now())
