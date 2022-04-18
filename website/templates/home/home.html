@@ -1,5 +1,4 @@
 {% extends "./navbar/navbar.html" %}
-
 {% block title%}
 Home
 {% endblock %}
@@ -7,11 +6,23 @@ Home
 {% block extracss %}
 <link rel="stylesheet" href="../../static/home/style.css" />
 {% endblock %}
-
 {% block extrascript %}
 <script src="../../static/home/script.js"></script>
 {% endblock%}
 
 {% block content %}
-<h1>Home page</h1>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-16 text-center">
+      Home page
+    </div>
+
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-6 text-center">
+      <img src="../../static/assets/images/logo.png" alt="" class="responsive" />
+    </div>
+
+  </div>
+</div>
 {% endblock%}

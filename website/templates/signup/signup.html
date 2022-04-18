@@ -5,45 +5,80 @@ Signup
 {% endblock %}
 
 {% block extracss %}
+<link rel="stylesheet" href="../../static/signup/style.css" />
 {% endblock %}
 
 {% block extrascript %}
 {% endblock%}
 
 {% block content %}
-<h1>Signup page</h1>
-<form method="POST">
-  <div class="">
-    <label for="email">Email</label>
-    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col justify-content-center">
+      <div class="card mx-auto">
+        <div class=" card-header">
+          <a class="navbar-brand" href="/">
+            Be fit!
+            <img src="../../static/assets/images/logo.png" alt="" width="32" height="32" />
+          </a>
+          <a class="nav-button" href="/">Home</a>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="col">
+              <h2>
+                Create a new account
+              </h2>
+              <div class="mt-3">
+                <span>
+                  Already a Member?
+                </span>
+                <br>
+                <a class="but" style="color: orange !important;" href="/login">Log In</a>
+              </div>
+              <form method="POST">
+                <div class="mt-2">
+                  <label for="firstName" class="form-label">First name</label>
+                  <input type="text" class="form-control form-control-sm" id="firstName" placeholder="eg. John">
+                </div>
+                <div class="mt-2">
+                  <label for="email" class="form-label">Email address</label>
+                  <input type="email" class="form-control form-control-sm" id="email" placeholder="name@example.com">
+                </div>
+                <div class="mt-2">
+                  <label for="password1" class="form-label">Password</label>
+                  <input type="password" class="form-control form-control-sm" id="password1" placeholder="Password">
+                </div>
+                <div class="mt-2">
+                  <label for="password2" class="form-label">Confirm password</label>
+                  <input type="password" class="form-control form-control-sm" id="password2" placeholder="Password">
+                </div>
+                <div class="">
+                  choose gender:
+                  <input type="radio" class="" id="male" name="gender" value="m" checked>
+                  <label for="male">Male</label>
+                  <input type="radio" class="" id="female" name="gender" value="f">
+                  <label for="female">Female</label>
+                </div>
+                <div class="">
+                  <label for="birthdate">Birthdate</label>
+                  <input type="date" class="" id="birthdate" name="birthdate" placeholder="Enter birthdate">
+                </div>
+                <div class="center mt-3">
+                  <button type="submit" class="btn btn-warning">Sign Up</button>
+                </div>
+              </form>
+            </div>
+            <div class="col" id="img">
+              <img src="../../static/assets/svg/signup_bg.svg" alt="" class="bg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="">
-    <label for="firstName">First Name</label>
-    <input type="text" class="" id="firstName" name="firstName" placeholder="Enter firstName">
-  </div>
-  <div class="">
-    <label for="password1">Password</label>
-    <input type="password" class="" id="password1" name="password1" placeholder="Enter password1">
-  </div>
-  <div class="">
-    <label for="password2">Password</label>
-    <input type="password" class="" id="password2" name="password2" placeholder="Enter password2">
-  </div>
-  <div class="">
-    choose gender:
-    <input type="radio" class="" id="male" name="gender" value="m" checked>
-    <label for="male">Male</label>
-    <input type="radio" class="" id="female" name="gender" value="f">
-    <label for="female">Female</label>
-  </div>
-  <div class="">
-    <label for="birthdate">Birthdate</label>
-    <input type="date" class="" id="birthdate" name="birthdate" placeholder="Enter birthdate">
-  </div>
-  <br />
-  <button type="submit" class="">Submit</button>
-</form>
-{% with messages = get_flashed_messages(with_categories=true) %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
             {% if category=='error' %}
@@ -54,5 +89,5 @@ Signup
             {% endif %}
         {% endfor %}
     {% endif %}
-{% endwith %}
-{% endblock%}
+  {% endwith %}
+  {% endblock%}
