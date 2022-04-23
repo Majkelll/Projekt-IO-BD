@@ -1,10 +1,12 @@
 from website.scripts.auth.signup.check_email import check_email
 from website.scripts.auth.signup.check_password import check_password
 from website.scripts.consts.signup_messages import *
+from datetime import datetime
 
 
-def validate_data(email, username, password1, password2):
+def validate_data(email, username, password1, password2, birthdate, gender):
     raport = {'status': None, 'content': None}
+    current_date = datetime.now()
 
     # check if email correct
     if not check_email(email):
@@ -28,6 +30,18 @@ def validate_data(email, username, password1, password2):
     elif not check_password(password1):
         raport['status'] = 'error'
         raport['content'] = PASSWORD_TOO_WEAK
+        return raport
+
+    # check if birthdate not in future
+    elif not birthdate.date() < current_date.date():
+        raport['status'] = 'error'
+        raport['content'] = BIRTHDATE_IN_FUTURE
+        return raport
+
+    # check gender
+    elif gender not in ['m', 'f']:
+        raport['status'] = 'error'
+        raport['content'] = WRONG_GENDER
         return raport
 
     else:

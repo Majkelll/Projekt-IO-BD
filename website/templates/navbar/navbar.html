@@ -14,6 +14,12 @@
   <a href="signup" class="">Signup</a>
   <a href="login" class="">Login</a>
   <a href="/" class="">Home</a>
+  <a href="bmi" class="">BMI calculator</a>
+
+  {% if current_user.is_authenticated %}
+    Witaj, {{ current_user.username }} [<a href="logout">Wyloguj</a>]
+  {% endif %}
+
   {% block content %} {% endblock%}
   {% block extrascript %} {% endblock%}
 </body>
