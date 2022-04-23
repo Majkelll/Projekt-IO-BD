@@ -4,7 +4,7 @@ from website.scripts.consts.signup_messages import *
 from datetime import datetime
 
 
-def validate_data(email, username, password1, password2, birthdate):
+def validate_data(email, username, password1, password2, birthdate, gender):
     raport = {'status': None, 'content': None}
     current_date = datetime.now()
 
@@ -32,10 +32,16 @@ def validate_data(email, username, password1, password2, birthdate):
         raport['content'] = PASSWORD_TOO_WEAK
         return raport
 
-    # check birthdate
+    # check if birthdate not in future
     elif not birthdate.date() < current_date.date():
         raport['status'] = 'error'
         raport['content'] = BIRTHDATE_IN_FUTURE
+        return raport
+
+    # check gender
+    elif gender not in ['m', 'f']:
+        raport['status'] = 'error'
+        raport['content'] = WRONG_GENDER
         return raport
 
     else:

@@ -1,6 +1,7 @@
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from sqlalchemy.schema import ForeignKey
 
 
 class User(db.Model, UserMixin):
@@ -15,7 +16,7 @@ class User(db.Model, UserMixin):
 
 class BMI(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"))
     weight = db.Column(db.Numeric)
     height = db.Column(db.Numeric)
     data_collected = db.Column(db.DateTime(timezone=True), default=func.now())

@@ -1,13 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import User
+from .models import User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
 from passlib.hash import sha256_crypt
 from datetime import datetime
 from website.scripts.auth.signup.validation import validate_data
 from website.scripts.consts.login_messages import *
-from website.scripts.bmi.calculate_bmi import calculate_bmi
+from website.scripts.bmi.bmi_bmr_calculator import calculate_bmi, calculate_bmr
 from website.scripts.bmi.bmi_summary import bmi_summary
+from website.scripts.bmi.validation import validate_bmi_form
+from website.scripts.utilities.birthdate_to_age import calculate_age
 
 views = Blueprint("views", __name__)
 
@@ -21,18 +23,30 @@ def home():
 def bmi():
     bmi = None
     bodytype_summary = None
+    bmr = None
     if request.method == 'POST':
-        weight = float(request.form.get('weight'))
-        height = float(request.form.get('height'))
-        # if current_user.is_authenticated:
-        #     gender = current_user.gender
-        # else:
-        #     gender = request.form.get('gender')
+        weight = request.form.get('weight')
+        height = request.form.get('height')
+        gender = request.form.get('gender') if not current_user.is_authenticated else current_user.gender
+        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d').date() if not current_user.is_authenticated else current_user.birthdate
 
-        bmi = calculate_bmi(weight, height)
-        bodytype_summary = bmi_summary(bmi)
+        validate = validate_bmi_form(weight, height, birthdate, gender)
+        if validate['status'] == 'success':
+            weight = float(weight)
+            height = float(height)
+            age = calculate_age(birthdate)
+            bmi = calculate_bmi(weight, height)
+            bmr = calculate_bmr(gender, weight, height, age)
+            bodytype_summary = bmi_summary(bmi)
 
-    return render_template('./bmi/bmi.html', bmi=bmi, summary=bodytype_summary)
+            if current_user.is_authenticated:
+                new_measurement = BMI(user_id=current_user.id, weight=weight, height=height)
+                db.session.add(new_measurement)
+                db.session.commit()
+        else:
+            flash(validate['content'], category=validate['status'])
+
+    return render_template('./bmi/bmi.html', bmi=bmi, summary=bodytype_summary, bmr=bmr)
 
 
 @views.route('/signup', methods=['GET', 'POST'])
@@ -45,7 +59,7 @@ def sign_up():
         birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d')
         gender = request.form.get('gender')
 
-        validate = validate_data(email, first_name, passwords[0], passwords[1], birthdate)
+        validate = validate_data(email, first_name, passwords[0], passwords[1], birthdate, gender)
 
         if validate['status'] == 'error':
             flash(validate['content'], category=validate['status'])

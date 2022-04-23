@@ -21,15 +21,19 @@ BMI calculator
       <input type="radio" class="" id="female" name="gender" value="f">
       <label for="female">Female</label>
     </div>
+    <div class="">
+      <label for="birthdate">Birthdate</label>
+      <input type="date" class="" id="birthdate" name="birthdate" placeholder="Enter birthdate">
+    </div>
   {% endif %}
 
   <div class="">
     <label for="height">Height</label>
-    <input type="number" class="" id="height" name="height" step=".01" placeholder="Enter your height"> [m]
+    <input type="number" class="" id="height" name="height" placeholder="Enter your height"> [cm]
   </div>
   <div class="">
     <label for="weight">Weight</label>
-    <input type="number" class="" id="weight" name="weight" step=".01" placeholder="Enter your weight"> [kg]
+    <input type="number" class="" id="weight" name="weight" placeholder="Enter your weight"> [kg]
   </div>
   <br />
   <button type="submit" class="">Submit</button>
@@ -38,6 +42,17 @@ BMI calculator
 {% if bmi %}
 <p>Your BMI: {{ bmi }}</p>
 <p>{{ summary }}</p>
+<p>Your caloric requirement is: {{ bmr }} kcal</p>
 {% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% if category=='error' %}
+                <p style="color: red;">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 {% endblock %}
