@@ -22,6 +22,26 @@ a {
   justify-content: space-between;
 }
 
+.navbar-brand, .nav-button {
+  color:white !important;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.nav-button:hover{
+  color:grey !important;
+}
+
+.card {
+  background: rgba(126, 90, 50, 0.4);
+  backdrop-filter: blur(2px);
+  color: white !important;
+}
+
 #img {
   display: flex;
   flex-direction: column;
@@ -34,14 +54,6 @@ a {
   height: 80%;
 }
 
-.nav-button {
-  display: flex;
-  align-items: center;
-  margin: 0 20px;
-}
-.nav-button:hover{
-  color:grey !important;
-}
 
 .card-header {
   display: flex;
