@@ -22,6 +22,26 @@ a {
   justify-content: space-between;
 }
 
+.navbar-brand, .nav-button {
+  color:white !important;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.nav-button:hover{
+  color:grey !important;
+}
+
+.card {
+  background: rgba(126, 90, 50, 0.4);
+  backdrop-filter: blur(2px);
+  color: white !important;
+}
+
 #img {
   display: flex;
   flex-direction: column;
@@ -34,13 +54,20 @@ a {
   height: 90%;
 }
 
-.nav-button {
-  display: flex;
-  align-items: center;
-  margin: 0 20px;
+.form-control {
+  background: rgb(184, 146, 107);
+  color: white;
+  border: none;
 }
-.nav-button:hover{
-  color:grey !important;
+
+.form-control:focus {
+  background: rgb(184, 146, 107);
+  color: white;
+  border: none;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+  color:    rgba(255, 255, 255, 0.6) !important;
 }
 
 .card-header {
@@ -57,6 +84,35 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.toast {
+  animation: fadeOut ease 5s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 3rem auto 0 auto;
+}
+@keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  90% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    visibility: hidden;
+  }
+}
+
+.toast-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media only screen and (max-width: 768px) {
