@@ -1,0 +1,119 @@
+body {
+  background: url(../assets/images/bg.png) no-repeat fixed;
+  background-size: cover;
+}
+
+.navbar {
+  display:none;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+a {
+  color:black !important;
+  text-decoration: none;
+}
+
+.container-fluid {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.row {
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar-brand, .nav-button {
+  color:white !important;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.nav-button:hover{
+  color:grey !important;
+}
+
+.card {
+  background: rgba(126, 90, 50, 0.4);
+  backdrop-filter: blur(2px);
+  color: white !important;
+}
+
+#img {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.bg {
+  width: 90%;
+  height: 90%;
+}
+
+.form-control {
+  background: rgb(184, 146, 107);
+  color: white;
+  border: none;
+}
+
+.form-control:focus {
+  background: rgb(184, 146, 107);
+  color: white;
+  border: none;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+  color:    rgba(255, 255, 255, 0.6) !important;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn {
+  color: white;
+}
+
+.center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 20rem;
+  }
+  h2 {
+    font-size: 1.45rem;
+  }
+  .col {
+    font-size: 1.2rem;
+  }
+  #img {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .card {
+    width: 40rem;
+  }
+}
