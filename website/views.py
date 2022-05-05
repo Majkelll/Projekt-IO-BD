@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from .models import User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
@@ -18,6 +18,24 @@ views = Blueprint("views", __name__)
 def home():
     return render_template('./home/home.html')
 
+@views.route('/bmi/data', methods=['POST'])
+def bmi_data():
+    if current_user.is_authenticated:
+        bmi = BMI.query.filter_by(user_id=current_user.id).all()
+        result = []
+        for k in bmi:
+            result.append({
+                'height': float(k.height),
+                'weight': float(k.weight),
+                'date': k.data_collected
+            })
+
+        if len(result) > 0:
+            return jsonify(result)
+        else:
+            return '{}'
+    else:
+        return 'User does not exist'
 
 @views.route('/bmi', methods=['GET', 'POST'])
 def bmi():
