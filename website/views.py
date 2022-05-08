@@ -3,7 +3,7 @@ from .models import User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
 from passlib.hash import sha256_crypt
-from datetime import datetime
+from datetime import datetime, timedelta
 from website.scripts.auth.signup.validation import validate_data
 from website.scripts.consts.login_messages import *
 from website.scripts.bmi.bmi_bmr_calculator import calculate_bmi, calculate_bmr
@@ -21,7 +21,9 @@ def home():
 @views.route('/bmi/data', methods=['POST'])
 def bmi_data():
     if current_user.is_authenticated:
-        bmi = BMI.query.filter_by(user_id=current_user.id).all()
+        current_time = datetime.utcnow()
+        four_weeks_ago = current_time - timedelta(weeks=4)
+        bmi = BMI.query.filter_by(user_id=current_user.id).filter(BMI.data_collected>four_weeks_ago).all()
         result = []
         for k in bmi:
             result.append({
