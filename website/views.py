@@ -27,8 +27,10 @@ def bmi():
     if request.method == 'POST':
         weight = request.form.get('weight')
         height = request.form.get('height')
-        gender = request.form.get('gender') if not current_user.is_authenticated else current_user.gender
-        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d').date() if not current_user.is_authenticated else current_user.birthdate
+        gender = request.form.get(
+            'gender') if not current_user.is_authenticated else current_user.gender
+        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d').date(
+        ) if not current_user.is_authenticated else current_user.birthdate
 
         validate = validate_bmi_form(weight, height, birthdate, gender)
         if validate['status'] == 'success':
@@ -40,7 +42,8 @@ def bmi():
             bodytype_summary = bmi_summary(bmi)
 
             if current_user.is_authenticated:
-                new_measurement = BMI(user_id=current_user.id, weight=weight, height=height)
+                new_measurement = BMI(
+                    user_id=current_user.id, weight=weight, height=height)
                 db.session.add(new_measurement)
                 db.session.commit()
         else:
@@ -55,17 +58,21 @@ def sign_up():
 
         email = request.form.get('email')
         first_name = request.form.get('firstName')
-        passwords = [request.form.get('password1'), request.form.get('password2')]
-        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d')
+        passwords = [request.form.get(
+            'password1'), request.form.get('password2')]
+        birthdate = datetime.strptime(
+            request.form.get('birthdate'), '%Y-%m-%d')
         gender = request.form.get('gender')
 
-        validate = validate_data(email, first_name, passwords[0], passwords[1], birthdate, gender)
+        validate = validate_data(
+            email, first_name, passwords[0], passwords[1], birthdate, gender)
 
         if validate['status'] == 'error':
             flash(validate['content'], category=validate['status'])
         elif validate['status'] == 'success':
             hashed_password = sha256_crypt.encrypt(passwords[0])
-            new_user = User(email=email, username=first_name, password=hashed_password, gender=gender, birthdate=birthdate)
+            new_user = User(email=email, username=first_name,
+                            password=hashed_password, gender=gender, birthdate=birthdate)
             db.session.add(new_user)
             db.session.commit()
             flash(validate['content'], category=validate['status'])
@@ -97,3 +104,8 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect('/login')
+
+
+@views.route('/burnedCalories', methods=['GET', 'POST'])
+def burned_calories():
+    return render_template('./burnedCalories/burnedCalories.html')
