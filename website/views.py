@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from .models import User, BMI
+from .models import Mets, User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
 from passlib.hash import sha256_crypt
@@ -109,3 +109,24 @@ def logout():
 @views.route('/burnedCalories', methods=['GET', 'POST'])
 def burned_calories():
     return render_template('./burnedCalories/burnedCalories.html')
+
+
+@views.route('/seeder')
+def seeder():
+    new_mets = [
+        Mets(name="using computer", value=1.5),
+        Mets(name="walking slowly", value=2.0),
+        Mets(name="walking", value=3.0),
+        Mets(name="vacuuming carpets", value=3.5),
+        Mets(name="tennis", value=5.0),
+        Mets(name="sexual activity", value=5.8),
+        Mets(name="dancing", value=6.0),
+        Mets(name="bicycling", value=6.0),
+        Mets(name="basketball-game", value=8.0),
+        Mets(name="swimming ", value=8.0),
+        Mets(name="football", value=10.0),
+    ]
+    for mets in new_mets:
+        db.session.add(mets)
+    db.session.commit()
+    return 'Seeded'

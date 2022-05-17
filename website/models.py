@@ -20,3 +20,9 @@ class BMI(db.Model):
     weight = db.Column(db.Numeric)
     height = db.Column(db.Numeric)
     data_collected = db.Column(db.DateTime(timezone=True), default=func.now())
+
+
+class Mets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+    value = db.Column(db.Numeric)
