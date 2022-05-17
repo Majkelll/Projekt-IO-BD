@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from .models import User, BMI
+from .models import Mets, User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
 from passlib.hash import sha256_crypt
@@ -47,8 +47,10 @@ def bmi():
     if request.method == 'POST':
         weight = request.form.get('weight')
         height = request.form.get('height')
-        gender = request.form.get('gender') if not current_user.is_authenticated else current_user.gender
-        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d').date() if not current_user.is_authenticated else current_user.birthdate
+        gender = request.form.get(
+            'gender') if not current_user.is_authenticated else current_user.gender
+        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d').date(
+        ) if not current_user.is_authenticated else current_user.birthdate
 
         validate = validate_bmi_form(weight, height, birthdate, gender)
         if validate['status'] == 'success':
@@ -60,7 +62,8 @@ def bmi():
             bodytype_summary = bmi_summary(bmi)
 
             if current_user.is_authenticated:
-                new_measurement = BMI(user_id=current_user.id, weight=weight, height=height)
+                new_measurement = BMI(
+                    user_id=current_user.id, weight=weight, height=height)
                 db.session.add(new_measurement)
                 db.session.commit()
         else:
@@ -75,17 +78,21 @@ def sign_up():
 
         email = request.form.get('email')
         first_name = request.form.get('firstName')
-        passwords = [request.form.get('password1'), request.form.get('password2')]
-        birthdate = datetime.strptime(request.form.get('birthdate'), '%Y-%m-%d')
+        passwords = [request.form.get(
+            'password1'), request.form.get('password2')]
+        birthdate = datetime.strptime(
+            request.form.get('birthdate'), '%Y-%m-%d')
         gender = request.form.get('gender')
 
-        validate = validate_data(email, first_name, passwords[0], passwords[1], birthdate, gender)
+        validate = validate_data(
+            email, first_name, passwords[0], passwords[1], birthdate, gender)
 
         if validate['status'] == 'error':
             flash(validate['content'], category=validate['status'])
         elif validate['status'] == 'success':
             hashed_password = sha256_crypt.encrypt(passwords[0])
-            new_user = User(email=email, username=first_name, password=hashed_password, gender=gender, birthdate=birthdate)
+            new_user = User(email=email, username=first_name,
+                            password=hashed_password, gender=gender, birthdate=birthdate)
             db.session.add(new_user)
             db.session.commit()
             flash(validate['content'], category=validate['status'])
@@ -117,3 +124,29 @@ def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect('/login')
+
+
+@views.route('/burnedCalories', methods=['GET', 'POST'])
+def burned_calories():
+    return render_template('./burnedCalories/burnedCalories.html')
+
+
+@views.route('/seeder')
+def seeder():
+    new_mets = [
+        Mets(name="using computer", value=1.5),
+        Mets(name="walking slowly", value=2.0),
+        Mets(name="walking", value=3.0),
+        Mets(name="vacuuming carpets", value=3.5),
+        Mets(name="tennis", value=5.0),
+        Mets(name="sexual activity", value=5.8),
+        Mets(name="dancing", value=6.0),
+        Mets(name="bicycling", value=6.0),
+        Mets(name="basketball-game", value=8.0),
+        Mets(name="swimming ", value=8.0),
+        Mets(name="football", value=10.0),
+    ]
+    for mets in new_mets:
+        db.session.add(mets)
+    db.session.commit()
+    return 'Seeded'
