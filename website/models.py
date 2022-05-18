@@ -26,3 +26,9 @@ class Mets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     value = db.Column(db.Numeric)
+
+
+class Rehydration(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"))
+    data_collected = db.Column(db.DateTime(timezone=True), default=func.now())

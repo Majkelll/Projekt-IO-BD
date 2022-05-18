@@ -1,0 +1,31 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Burned calories
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="../../static/rehydration/style.css" />
+{% endblock %}
+{% block extrascript %}
+<script src="../../static/rehydration/script.js"></script>
+{% endblock%}
+
+{% block content %}
+<div>
+  <div>{{ drinkedToday }}</div>
+  <form id='plus' name='plus' value="plus" method="POST">
+    <button type="submit">Plus</button>
+  </form>
+  <br>
+  <div class="calendar">
+    <div class="calendar-day">Today: {{ calendar.0 }}</div>
+    <div class="calendar-day">1 day ago: {{ calendar.1 }}</div>
+    <div class="calendar-day">2 day ago: {{ calendar.3 }}</div>
+    <div class="calendar-day">3 day ago: {{ calendar.2 }}</div>
+    <div class="calendar-day">4 day ago: {{ calendar.4 }}</div>
+    <div class="calendar-day">5 day ago: {{ calendar.5 }}</div>
+    <div class="calendar-day">6 day ago: {{ calendar.6 }}</div>
+  </div>
+</div>
+{% endblock %}
