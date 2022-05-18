@@ -159,21 +159,6 @@ def rehydration():
     return render_template('./rehydration/rehydration.html', drinkedToday=len(rehydration), calendar=finish_result)
 
 
-@views.route('/hydration/data', methods=['GET'])
-def hydation_data():
-    if current_user.is_authenticated:
-        current_time = datetime.utcnow()
-        finish_result = []
-        for i in range(7):
-            day_ago = current_time - timedelta(days=i + 1)
-            day_ago_2 = current_time - timedelta(days=i)
-            rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
-                Rehydration.data_collected > day_ago).filter(Rehydration.data_collected < day_ago_2).all()
-            finish_result.append(len(rehydration))
-
-    return jsonify(finish_result)
-
-
 @views.route('/seeder')
 def seeder():
     new_mets = [
