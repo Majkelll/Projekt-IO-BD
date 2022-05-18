@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from .models import Mets, User, BMI
+from .models import Mets, Rehydration, User, BMI
 from . import db
 from flask_login import login_user, current_user, logout_user
 from passlib.hash import sha256_crypt
@@ -18,12 +18,14 @@ views = Blueprint("views", __name__)
 def home():
     return render_template('./home/home.html')
 
+
 @views.route('/bmi/data', methods=['POST'])
 def bmi_data():
     if current_user.is_authenticated:
         current_time = datetime.utcnow()
         four_weeks_ago = current_time - timedelta(weeks=4)
-        bmi = BMI.query.filter_by(user_id=current_user.id).filter(BMI.data_collected>four_weeks_ago).all()
+        bmi = BMI.query.filter_by(user_id=current_user.id).filter(
+            BMI.data_collected > four_weeks_ago).all()
         result = []
         for k in bmi:
             result.append({
@@ -38,6 +40,7 @@ def bmi_data():
             return '{}'
     else:
         return 'User does not exist'
+
 
 @views.route('/bmi', methods=['GET', 'POST'])
 def bmi():
@@ -129,6 +132,31 @@ def logout():
 @views.route('/burnedCalories', methods=['GET', 'POST'])
 def burned_calories():
     return render_template('./burnedCalories/burnedCalories.html')
+
+
+@views.route('/hydration', methods=['GET', 'POST'])
+def rehydration():
+    if request.method == 'POST':
+        new_rehydration = Rehydration(user_id=current_user.id)
+        db.session.add(new_rehydration)
+        db.session.commit()
+
+    current_time = datetime.utcnow()
+    finish_result = []
+    for i in range(7):
+        day_ago = current_time - timedelta(days=i + 1)
+        day_ago_2 = current_time - timedelta(days=i)
+        rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
+            Rehydration.data_collected > day_ago).filter(Rehydration.data_collected < day_ago_2).all()
+        finish_result.append(len(rehydration))
+
+    rehydration = []
+    if current_user.is_authenticated:
+        current_time = datetime.utcnow()
+        day_ago = current_time - timedelta(days=1)
+        rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
+            Rehydration.data_collected > day_ago).all()
+    return render_template('./rehydration/rehydration.html', drinkedToday=len(rehydration), calendar=finish_result)
 
 
 @views.route('/seeder')
