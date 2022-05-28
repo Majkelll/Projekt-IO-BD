@@ -73,6 +73,10 @@
   border-radius: 100px;
 }
 
+.glass-item p {
+  margin-top: -0.8rem;
+}
+
 .chart-body {
   transform: translateX(-100px) translateY(-70px);
 }

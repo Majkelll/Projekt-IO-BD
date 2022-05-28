@@ -52,9 +52,10 @@ function getGraph(e) {
 
   e.target.classList.add("chart-button_active");
   if (e.target.id == "week") {
-    chartImg.src = "../assets/images/week.png";
+    chartImg.src = "../../static/assets/images/week.png";
+    console.log(chartImg);
   } else {
-    chartImg.src = "../assets/images/month.png";
+    chartImg.src = "../../static/assets/images/month.png";
   }
 }
 
