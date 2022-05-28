@@ -12,20 +12,73 @@ Burned calories
 {% endblock%}
 
 {% block content %}
-<div>
-  <div>{{ drinkedToday }}</div>
-  <form id='plus' name='plus' value="plus" method="POST">
-    <button type="submit">Plus</button>
-  </form>
-  <br>
-  <div class="calendar">
-    <div class="calendar-day">Today: {{ calendar.0 }}</div>
-    <div class="calendar-day">1 day ago: {{ calendar.1 }}</div>
-    <div class="calendar-day">2 day ago: {{ calendar.3 }}</div>
-    <div class="calendar-day">3 day ago: {{ calendar.2 }}</div>
-    <div class="calendar-day">4 day ago: {{ calendar.4 }}</div>
-    <div class="calendar-day">5 day ago: {{ calendar.5 }}</div>
-    <div class="calendar-day">6 day ago: {{ calendar.6 }}</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Balance</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="balance-body">
+    <div class="balance-container">
+      <h1 class="balance-title">
+        Water balance
+      </h1>
+      <div class="balance-items">
+        <!-- glass -->
+        <div class="glass-body">
+          <div id="glass" class="glass">
+            <div id="water" class="water"></div>
+          </div>
+          <div class="glass-items">
+            <div id="minus" class="glass-item">-</div>
+            <div id="plus" class="glass-item">+</div>
+          </div>
+        </div>
+        <!-- glass -->
+        <!-- chart -->
+        <div class="chart-body">
+          <div class="chart-buttons-body">
+            <div class="chart-buttons">
+              <a id="week" href="#" class="chart-button chart-button_active">Week</a>
+              <a id="month" href="#" class="chart-button">Month</a>
+            </div>
+          </div>
+
+          <div class="chart-info">
+            <div class="chart-info__item">
+              <div class="chart-liters">
+                <h4 class="chart-liters__title">2.5 L</h4>
+                <h4 class="chart-liters__title">2.0 L</h4>
+                <h4 class="chart-liters__title">1.5 L</h4>
+                <h4 class="chart-liters__title">1.0 L</h4>
+                <h4 class="chart-liters__title">0.5 L</h4>
+              </div>
+              <div class="chart-img-body">
+                <img id="chart-img" src="../../static/assets/images/week.png" alt="" class="chart-img">
+              </div>
+            </div>
+            <div class="weeks-items">
+              <h4 class="weeks__title">Mon</h4>
+              <h4 class="weeks__title">Tue</h4>
+              <h4 class="weeks__title">Wed</h4>
+              <h4 class="weeks__title">Thu</h4>
+              <h4 class="weeks__title">Fri</h4>
+              <h4 class="weeks__title">Sat</h4>
+              <h4 class="weeks__title">Sun</h4>
+            </div>
+          </div>
+        </div>
+        <!-- chart -->
+      </div>
+    </div>
   </div>
-</div>
+  <script src="main.js"></script>
+</body>
+
+</html>
 {% endblock %}
