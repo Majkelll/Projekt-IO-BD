@@ -1,0 +1,152 @@
+*
+{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+.balance-body
+{
+	background: url(imgs/bg.png) no-repeat center top/100% 100%;
+	height: 100vh;
+}
+.balance-container
+{
+		max-width: 1300px;
+		margin: 0 auto;
+}
+.balance-title
+{
+	text-align: center;
+	font-size: 90px;
+	padding-top: 40px;
+	padding-bottom: 80px;
+	color: #fff;
+}
+.balance-items
+{
+	display: flex;
+    justify-content: space-between;
+}
+.glass-body
+{
+	width: 410px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.glass
+{
+	transform: perspective(330px) rotateX(-45deg);
+    /*width: 150px;
+    height: 300px;*/
+    width: 180px;
+    height: 350px;
+    background-color: #d4e1f4;
+    position: relative;
+    /*border: 2px solid #fff;*/
+    border-radius: 10px;
+    overflow: hidden;
+}
+.water
+{
+	background-color: #7287a4;
+	width: 200px;
+	height: 200px;
+	display: block;
+	position: absolute;
+	bottom: -150px;
+	left: -12px;
+	transform: perspective(330px) rotateX(-45deg) scale(1);
+	border-radius: 0;
+}
+.glass-items
+{
+	position: absolute;
+    top: 25%;
+    display: flex;
+    width: 376px;
+    justify-content: space-between;
+}
+.glass-item
+{
+	cursor: pointer;
+	text-align: center;
+    width: 70px;
+    height: 70px;
+    font-size: 57px;
+    background-color: #7287a4;
+    color: #fff;
+    border-radius: 100px;
+}
+.chart-body
+{
+	transform: translateX(-100px)  translateY(-70px);
+}
+.chart-buttons-body
+{
+	padding-bottom: 20px;
+}
+.chart-buttons
+{
+	display: flex;
+	justify-content: space-around;
+}
+.chart-button
+{
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	padding: 10px 110px;
+	background-color: transparent;
+	border-radius: 10px;
+	font-size: 25px;
+}
+.chart-button_active
+{
+	background-color: #7287a4;
+}
+.chart-info__item
+{
+	display: flex;
+}
+.chart-info
+{
+	padding: 10px 30px;
+	border-radius: 10px;
+	background-color: rgba(255,255,255,0.3);
+}
+.chart-liters
+{
+	padding-right: 20px;
+}
+.chart-liters__title
+{
+	padding-bottom: 15px;
+	font-size: 25px;
+	color: #fff;
+}
+.chart-img-body
+{
+	width: 380px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chart-img
+{
+	display: block;
+	width: 100%;
+}
+.weeks-items
+{
+	display: flex;
+	padding-left: 65px;
+}
+.weeks__title
+{
+	padding-right: 15px;
+	color: #fff;
+	font-size: 25px;
+}
