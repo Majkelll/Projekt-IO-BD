@@ -2,3 +2,7 @@ body {
   background: url(../assets/images/bg.png) no-repeat fixed;
   background-size: cover;
 }
+
+#BMIChart {
+  background-color: white;
+}
