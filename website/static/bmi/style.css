@@ -10,20 +10,22 @@ body{
 
 }
 body{
+  color: #EDECED;
   margin: 20px;
   padding: 10px;
   text-align: center;
   font-family: sans-serif;
+  background-image: url("../../static/assets/images/bg.png");
 
 
 }
 
 .container{
-    border: solid 1px #5134E3;
+    border: solid 1px ;
     padding: 10px 20px;
     margin: 0 400px;
     border-radius: 4px;
-    background: #2BF0C5;
+    background: rgba(126, 90, 50, 0.4);
     /*background-image: url(images.png);*/
 
 }
@@ -32,6 +34,7 @@ body{
     display: block;
     margin: 0px;
     font-size: 16px;
+    color: #D4D4D4;
 
 }
 
