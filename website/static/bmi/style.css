@@ -1,4 +1,96 @@
-body {
+/*body {
   background: url(../assets/images/bg.png) no-repeat fixed;
   background-size: cover;
+}*/
+body{
+  background: #d5b6a1;
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
+
 }
+body{
+  margin: 20px;
+  padding: 10px;
+  text-align: center;
+  font-family: sans-serif;
+
+
+}
+
+.container{
+    border: solid 1px #5134E3;
+    padding: 10px 20px;
+    margin: 0 400px;
+    border-radius: 4px;
+    background: #2BF0C5;
+    /*background-image: url(images.png);*/
+
+}
+.calc-info{
+    font-weight: 700;
+    display: block;
+    margin: 0px;
+    font-size: 16px;
+
+}
+
+.calc-info2{
+    font-size: 14px;
+    text-align: center;
+    margin: 3px;
+    padding: 3px;
+    list-style-type: none;
+
+
+}
+
+h2{
+  font-size: 30px;
+  font-weight: 600;
+}
+.text{
+  text-align: left;
+  display: inline-block;
+  color: #fff;
+  /*margin-left: 150px;*/
+}
+#a,#w, #h{
+  display: inline-block;
+  color: #fff;
+  text-align: left;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #fff;
+  width: 100px;
+}
+  #a:focus, #w:focus, #h:focus{
+    border-bottom: 2px solid #b8926b;
+    display: inline-block;
+    width: 120px;
+    transition: 0.5s;
+  }
+  #result{
+    color: #fff;
+  }
+  #btn{
+    font-family: inherit;
+    margin-top: 10px;
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(120deg,#b08151, #b08151);
+    width: 150px;
+    padding: 10px;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+  }
+  #btn:hover{
+    box-shadow: 1px 1px 10px #b8926b;
+  }
+  #info{
+    font-size: 12px;
+    font-family: inherit;
+  }
