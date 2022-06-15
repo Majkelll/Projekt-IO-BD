@@ -17,6 +17,7 @@ function addWater(e) {
     water.style.borderRadius = "50%";
     water.style.bottom = "-80px";
   }
+  axios.post("http://127.0.0.1:5000/hydration");
 }
 
 minus.onclick = removeWater;

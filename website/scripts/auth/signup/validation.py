@@ -1,12 +1,24 @@
+from website.models import User
 from website.scripts.auth.signup.check_email import check_email
 from website.scripts.auth.signup.check_password import check_password
 from website.scripts.consts.signup_messages import *
 from datetime import datetime
+from .... import db
 
 
 def validate_data(email, username, password1, password2, birthdate, gender):
     raport = {'status': None, 'content': None}
     current_date = datetime.now()
+
+    if db.session.query(User).filter_by(username=username).first():
+        raport['status'] = 'error'
+        raport['content'] = WRONG_NAME
+        return raport
+
+    if db.session.query(User).filter_by(email=email).first():
+        raport['status'] = 'error'
+        raport['content'] = WRONG_EMAIL
+        return raport
 
     # check if email correct
     if not check_email(email):

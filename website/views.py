@@ -78,7 +78,6 @@ def bmi():
 @views.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
-
         email = request.form.get('email')
         first_name = request.form.get('firstName')
         passwords = [request.form.get(
@@ -140,23 +139,8 @@ def rehydration():
         new_rehydration = Rehydration(user_id=current_user.id)
         db.session.add(new_rehydration)
         db.session.commit()
-
-    current_time = datetime.utcnow()
-    finish_result = []
-    for i in range(7):
-        day_ago = current_time - timedelta(days=i + 1)
-        day_ago_2 = current_time - timedelta(days=i)
-        rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
-            Rehydration.data_collected > day_ago).filter(Rehydration.data_collected < day_ago_2).all()
-        finish_result.append(len(rehydration))
-
-    rehydration = []
-    if current_user.is_authenticated:
-        current_time = datetime.utcnow()
-        day_ago = current_time - timedelta(days=1)
-        rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
-            Rehydration.data_collected > day_ago).all()
-    return render_template('./rehydration/rehydration.html', drinkedToday=len(rehydration), calendar=finish_result)
+    
+    return render_template('./rehydration/rehydration.html')
 
 
 @views.route('/seeder')
