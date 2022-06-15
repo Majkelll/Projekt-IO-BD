@@ -130,7 +130,19 @@ def logout():
 
 @views.route('/burnedCalories', methods=['GET', 'POST'])
 def burned_calories():
-    return render_template('./burnedCalories/burnedCalories.html')
+    burned_caloriess = None
+    activ = ""
+    if request.method == 'POST':
+        sex = request.form.get('sex')
+        time = request.form.get('time')
+        activ = request.form.get('activ')
+        age = request.form.get('age-output')
+        weight = request.form.get('weight-output')
+        height = request.form.get('height-output')
+        mets = db.session.query(Mets).filter_by(name=activ).first()
+        burned_caloriess = (int(mets.value) * 3.5 *
+                            int(weight) / 200) * abs(int(time))
+    return render_template('./burnedCalories/burnedCalories.html', burned_calories=burned_caloriess, activities=db.session.query(Mets).all())
 
 
 @views.route('/hydration', methods=['GET', 'POST'])
@@ -139,7 +151,7 @@ def rehydration():
         new_rehydration = Rehydration(user_id=current_user.id)
         db.session.add(new_rehydration)
         db.session.commit()
-    
+
     return render_template('./rehydration/rehydration.html')
 
 
