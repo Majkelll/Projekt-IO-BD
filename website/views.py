@@ -155,6 +155,16 @@ def rehydration():
     return render_template('./rehydration/rehydration.html')
 
 
+@views.route('/hydration/data', methods=['GET', 'POST'])
+def rehydration_api():
+    if current_user.is_authenticated:
+        current_time = datetime.utcnow()
+        day_ago = current_time - timedelta(days=1)
+        rehydration = Rehydration.query.filter_by(user_id=current_user.id).filter(
+            Rehydration.data_collected > day_ago).all()
+    return str(len(rehydration))
+
+
 @views.route('/seeder')
 def seeder():
     new_mets = [
