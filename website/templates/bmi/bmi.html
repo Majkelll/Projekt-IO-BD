@@ -12,48 +12,62 @@ BMI calculator
 {% endblock %}
 
 {% block content %}
-<h1>BMI calculator</h1>
-<form method="POST">
-  {% if not current_user.is_authenticated %}
-    <div class="">
-      Your gender:
-      <input type="radio" class="" id="male" name="gender" value="m" checked>
-      <label for="male">Male</label>
-      <input type="radio" class="" id="female" name="gender" value="f">
-      <label for="female">Female</label>
+<div class="main-container">
+  <form method="POST">
+    <div class="form-container">
+      <div class="input-container">
+        {% if not current_user.is_authenticated %}
+        <div class="">
+          Your gender:
+          <input type="radio" class="" id="male" name="gender" value="m" checked>
+          <label for="male">Male</label>
+          <input type="radio" class="" id="female" name="gender" value="f">
+          <label for="female">Female</label>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="">
+          <label for="birthdate">Birthdate</label>
+          <input type="date" class="" id="birthdate" name="birthdate" placeholder="Enter birthdate">
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="input-container">
+        <div class="">
+          <label for="height">Height</label>
+          <input type="number" class="" id="height" name="height" placeholder="Enter your height"> [cm]
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="">
+          <label for="weight">Weight</label>
+          <input type="number" class="" id="weight" name="weight" placeholder="Enter your weight"> [kg]
+        </div>
+      </div>
+      <br />
+      <button type="submit" class="">Submit</button>
+      {% if bmi %}
+      <p>Your BMI: {{ bmi }}</p>
+      <p>{{ summary }}</p>
+      <p>Twoje zapotrzebowanie kaloryczne to: {{ bmr }} kcal</p>
+      {% endif %}
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      {% if category=='error' %}
+      <p style="color: red;">{{ message }}</p>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
     </div>
-    <div class="">
-      <label for="birthdate">Birthdate</label>
-      <input type="date" class="" id="birthdate" name="birthdate" placeholder="Enter birthdate">
-    </div>
-  {% endif %}
-
-  <div class="">
-    <label for="height">Height</label>
-    <input type="number" class="" id="height" name="height" placeholder="Enter your height"> [cm]
-  </div>
-  <div class="">
-    <label for="weight">Weight</label>
-    <input type="number" class="" id="weight" name="weight" placeholder="Enter your weight"> [kg]
-  </div>
-  <br />
-  <button type="submit" class="">Submit</button>
-</form>
-
-{% if bmi %}
-<p>Your BMI: {{ bmi }}</p>
-<p>{{ summary }}</p>
-<p>Your caloric requirement is: {{ bmr }} kcal</p>
-{% endif %}
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            {% if category=='error' %}
-                <p style="color: red;">{{ message }}</p>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
+  </form>
+</div>
 {% endblock %}
+
+
+
