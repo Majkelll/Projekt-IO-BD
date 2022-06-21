@@ -168,12 +168,12 @@ def rehydration_api():
 @views.route('/seeder')
 def seeder():
     new_mets = [
-        Mets(name="using computer", value=1.5),
-        Mets(name="walking slowly", value=2.0),
+        Mets(name="using-computer", value=1.5),
+        Mets(name="walking-slowly", value=2.0),
         Mets(name="walking", value=3.0),
-        Mets(name="vacuuming carpets", value=3.5),
+        Mets(name="vacuuming-carpets", value=3.5),
         Mets(name="tennis", value=5.0),
-        Mets(name="sexual activity", value=5.8),
+        Mets(name="sexual-activity", value=5.8),
         Mets(name="dancing", value=6.0),
         Mets(name="bicycling", value=6.0),
         Mets(name="basketball-game", value=8.0),
