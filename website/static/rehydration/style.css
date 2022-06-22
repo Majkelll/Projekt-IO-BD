@@ -23,7 +23,7 @@ body {
 
 .balance-items {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .glass-body {
