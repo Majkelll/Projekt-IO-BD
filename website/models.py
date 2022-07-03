@@ -32,3 +32,12 @@ class Rehydration(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey("user.id"))
     data_collected = db.Column(db.DateTime(timezone=True), default=func.now())
+
+
+class UserSettings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"))
+    water_goal = db.Column(db.Numeric)
+    color_mode = db.Column(db.String(1))
+    unit_system = db.Column(db.String(1))
+    data_collected = db.Column(db.DateTime(timezone=True), default=func.now())
